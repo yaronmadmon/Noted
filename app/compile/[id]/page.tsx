@@ -73,21 +73,19 @@ export default function OutputPage() {
 
   return (
     <ErrorBoundary>
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="max-w-6xl mx-auto px-4 py-6 sm:py-10">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <a href="/compile" className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
-            ← New compilation
-          </a>
-        </div>
+      <div className="flex items-center justify-between mb-6 sm:mb-8">
+        <a href="/compile" className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
+          ← New compilation
+        </a>
         <ExportButton output={data.output} />
       </div>
 
-      {/* Two-column layout */}
-      <div className="flex gap-6 items-start">
+      {/* Stacked on mobile, two-column on large screens */}
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
         {/* Main document */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 w-full">
           <OutputDocument
             output={data.output}
             activeSource={activeSource}
@@ -97,7 +95,7 @@ export default function OutputPage() {
 
         {/* Source sidebar */}
         {data.sourceFiles.length > 0 && (
-          <div className="w-64 shrink-0 sticky top-6">
+          <div className="w-full lg:w-64 lg:shrink-0 lg:sticky lg:top-6">
             <SourcePanel sources={data.sourceFiles} activeSource={activeSource} />
           </div>
         )}

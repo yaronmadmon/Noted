@@ -14,7 +14,7 @@ export default function OutputDocument({
   onSourceClick,
 }: OutputDocumentProps) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-8">
       {/* Title */}
       <h1 className="text-2xl font-bold text-gray-900 mb-4">{output.title}</h1>
 

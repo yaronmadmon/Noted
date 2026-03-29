@@ -22,14 +22,14 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <nav className="border-b border-gray-200 bg-white">
-          <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
-            <a href="/" className="text-lg font-semibold text-gray-900">
+          <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between gap-3">
+            <a href="/" className="text-base sm:text-lg font-semibold text-gray-900 shrink-0">
               Knowledge Compiler
             </a>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4 min-w-0">
               {user ? (
                 <>
-                  <span className="text-sm text-gray-400">{user.email}</span>
+                  <span className="hidden sm:block text-sm text-gray-400 truncate max-w-[160px]">{user.email}</span>
                   <a
                     href="/dashboard"
                     className="text-sm text-gray-600 hover:text-gray-900 transition-colors"

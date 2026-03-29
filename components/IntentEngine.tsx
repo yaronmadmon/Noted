@@ -43,7 +43,7 @@ interface IntentEngineProps {
 
 export default function IntentEngine({ selected, onSelect }: IntentEngineProps) {
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
       {CARDS.map(({ value, icon, title, description }) => {
         const isSelected = selected === value
         return (

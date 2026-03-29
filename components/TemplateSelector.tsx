@@ -44,16 +44,16 @@ export default function TemplateSelector({
                   : 'border-gray-200 bg-white hover:border-gray-400 text-gray-900'
               }`}
             >
-              <div className="flex items-start justify-between gap-4">
-                <div>
+              <div className="flex flex-col gap-1">
+                <div className="flex items-start justify-between gap-4">
                   <p className="text-sm font-semibold">{tpl.label}</p>
-                  <p className={`text-xs mt-0.5 ${isSelected ? 'text-gray-300' : 'text-gray-400'}`}>
-                    {tpl.description}
+                  <p className={`text-xs shrink-0 mt-0.5 ${isSelected ? 'text-gray-300' : 'text-gray-400'}`}>
+                    {tpl.sections.join(' · ')}
                   </p>
                 </div>
-                <div className={`text-xs shrink-0 mt-0.5 ${isSelected ? 'text-gray-300' : 'text-gray-400'}`}>
-                  {tpl.sections.join(' · ')}
-                </div>
+                <p className={`text-xs ${isSelected ? 'text-gray-300' : 'text-gray-400'}`}>
+                  {tpl.description}
+                </p>
               </div>
             </button>
           )

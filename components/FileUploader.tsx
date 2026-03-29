@@ -131,7 +131,7 @@ export default function FileUploader({ onFilesChange }: FileUploaderProps) {
     <div className="space-y-4">
       <div
         {...getRootProps()}
-        className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors ${
+        className={`border-2 border-dashed rounded-xl p-6 sm:p-10 text-center cursor-pointer transition-colors ${
           isDragActive
             ? 'border-gray-900 bg-gray-100'
             : 'border-gray-300 bg-white hover:border-gray-400 hover:bg-gray-50'

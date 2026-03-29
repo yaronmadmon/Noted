@@ -88,13 +88,13 @@ export default function CompilePage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12">
-      <div className="flex items-start justify-between mb-8">
+    <div className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-1">Compile</h1>
-          <p className="text-gray-500">Upload your notes, choose an output type, and let AI do the rest.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Compile</h1>
+          <p className="text-sm sm:text-base text-gray-500">Upload your notes, choose an output type, and let AI do the rest.</p>
         </div>
-        {usage && <div className="w-52 shrink-0"><UsageBanner used={usage.used} limit={usage.limit} /></div>}
+        {usage && <div className="sm:w-52 sm:shrink-0"><UsageBanner used={usage.used} limit={usage.limit} /></div>}
       </div>
 
       {/* Step 1 — Sources */}
