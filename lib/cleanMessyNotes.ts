@@ -23,8 +23,11 @@ function messinessScore(text: string): number {
   return Math.min(score, 1)
 }
 
+const MAX_MESSY_CHARS = 12000
+
 export async function cleanMessyNotes(text: string): Promise<string> {
   if (messinessScore(text) < 0.3) return text
+  const input = text.length > MAX_MESSY_CHARS ? text.slice(0, MAX_MESSY_CHARS) : text
 
   const response = await client.chat.completions.create({
     model: 'gpt-4o',
@@ -38,7 +41,7 @@ Do NOT add new information, opinions, or analysis. Preserve every original idea.
 Return ONLY the restructured text — no explanation, no commentary.
 
 ORIGINAL NOTES:
-${text}`,
+${input}`,
       },
     ],
   })

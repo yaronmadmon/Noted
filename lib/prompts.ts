@@ -16,13 +16,38 @@ flow logically. Each section should build on the last, suitable for long-form pu
 Use engaging headings, short paragraphs, and a clear narrative arc suitable for online readers.`,
 }
 
+const MAX_CHARS_PER_SOURCE = 12000
+const MAX_TOTAL_CHARS = 60000
+
 export function buildCompilePrompt(
   intent: IntentType,
   sources: { fileName: string; text: string }[],
   templateId?: string,
   stitchReport?: StitchReport
 ): string {
-  const sourceBlock = sources
+  // Truncate each source then enforce a total cap
+  let totalChars = 0
+  const truncatedSources = sources.map((s) => {
+    const text = s.text.length > MAX_CHARS_PER_SOURCE
+      ? s.text.slice(0, MAX_CHARS_PER_SOURCE) + '\n\n[Content truncated]'
+      : s.text
+    return { ...s, text }
+  })
+
+  const cappedSources: typeof truncatedSources = []
+  for (const s of truncatedSources) {
+    if (totalChars + s.text.length > MAX_TOTAL_CHARS) {
+      const remaining = MAX_TOTAL_CHARS - totalChars
+      if (remaining > 500) {
+        cappedSources.push({ ...s, text: s.text.slice(0, remaining) + '\n\n[Content truncated]' })
+      }
+      break
+    }
+    cappedSources.push(s)
+    totalChars += s.text.length
+  }
+
+  const sourceBlock = cappedSources
     .map((s, i) => `--- SOURCE ${i + 1}: ${s.fileName} ---\n${s.text}`)
     .join('\n\n')
 
