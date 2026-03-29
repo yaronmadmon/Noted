@@ -18,7 +18,6 @@ export async function extractTextFromBuffer(
     case 'audio':
       return transcribeAudio(buffer, mimeType)
     case 'url':
-      // URL sources have extracted_text pre-populated — this path is never reached
       return buffer.toString('utf-8')
     default:
       return buffer.toString('utf-8')
@@ -53,15 +52,26 @@ async function extractViaGoogleVision(buffer: Buffer): Promise<string> {
 }
 
 async function extractFromPdf(buffer: Buffer): Promise<string> {
+  try {
+    // pdf-parse is a CommonJS module
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const pdfParse = require('pdf-parse')
+    const data = await pdfParse(buffer)
+    const text = data.text?.trim() ?? ''
+    if (text.length > 0) return text
+  } catch {
+    // fall through to fallback
+  }
+
+  // Fallback: basic text extraction for simple PDFs
   const content = buffer.toString('latin1')
   const matches = content.match(/BT[\s\S]*?ET/g) ?? []
-
   const lines: string[] = []
   for (const block of matches) {
-    const tjMatches = block.match(/\(([^)]+)\)\s*Tj/g) ?? []
+    const tjMatches = block.match(/\(([^)]{1,200})\)\s*Tj/g) ?? []
     for (const tj of tjMatches) {
       const text = tj.match(/\(([^)]+)\)/)?.[1]
-      if (text) lines.push(text)
+      if (text && /[a-zA-Z0-9]/.test(text)) lines.push(text)
     }
   }
 
