@@ -1,5 +1,6 @@
 import { IntentType } from '@/types'
 import { TEMPLATES } from './templates'
+import { StitchReport } from './stitchIdeas'
 
 const INTENT_INSTRUCTIONS: Record<IntentType, string> = {
   study: `You are creating a Study Guide. Structure the output so it is optimised for
@@ -18,7 +19,8 @@ Use engaging headings, short paragraphs, and a clear narrative arc suitable for 
 export function buildCompilePrompt(
   intent: IntentType,
   sources: { fileName: string; text: string }[],
-  templateId?: string
+  templateId?: string,
+  stitchReport?: StitchReport
 ): string {
   const sourceBlock = sources
     .map((s, i) => `--- SOURCE ${i + 1}: ${s.fileName} ---\n${s.text}`)
@@ -32,6 +34,20 @@ ${template.sections.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 Do not add, remove, or rename any of these headings.`
     : `Use whatever section headings best fit the content and intent.`
 
+  const stitchBlock = stitchReport && (
+    stitchReport.repeatedIdeas.length > 0 || stitchReport.contradictions.length > 0
+  )
+    ? `\nCROSS-SOURCE ANALYSIS:
+${stitchReport.repeatedIdeas.length > 0
+  ? `The following ideas appear in multiple sources — synthesise them rather than repeating:
+${stitchReport.repeatedIdeas.map((r) => `• "${r.concept}" — found in ${r.sources.join(', ')}`).join('\n')}`
+  : ''}
+${stitchReport.contradictions.length > 0
+  ? `\nThe following contradictions were detected — acknowledge and resolve them in your output:
+${stitchReport.contradictions.map((c) => `• "${c.concept}": ${c.sourceA} says one thing, ${c.sourceB} says the opposite`).join('\n')}`
+  : ''}`
+    : ''
+
   return `${INTENT_INSTRUCTIONS[intent]}
 
 You will be given one or more source documents. Your job is to compile them into a single,
@@ -40,6 +56,7 @@ it draws from using the sourceRefs field.
 
 DOCUMENT STRUCTURE:
 ${structureInstruction}
+${stitchBlock}
 
 SOURCE DOCUMENTS:
 ${sourceBlock}

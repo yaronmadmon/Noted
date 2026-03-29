@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import FileUploader, { UploadedFile } from '@/components/FileUploader'
+import UrlIngester from '@/components/UrlIngester'
 import IntentEngine from '@/components/IntentEngine'
 import TemplateSelector from '@/components/TemplateSelector'
+import MessyNotesToggle from '@/components/MessyNotesToggle'
 import SubmitButton from '@/components/SubmitButton'
 import UsageBanner from '@/components/UsageBanner'
 import { getTemplatesForIntent } from '@/lib/templates'
@@ -17,16 +19,15 @@ const INTENT_LABELS: Record<IntentType, string> = {
   content: 'Content',
 }
 
-interface Usage {
-  used: number
-  limit: number
-}
+interface Usage { used: number; limit: number }
 
 export default function CompilePage() {
   const router = useRouter()
   const [files, setFiles] = useState<UploadedFile[]>([])
+  const [urlFileIds, setUrlFileIds] = useState<string[]>([])
   const [intent, setIntent] = useState<IntentType | null>(null)
   const [templateId, setTemplateId] = useState<string | null>(null)
+  const [messyNotes, setMessyNotes] = useState(false)
   const [isCompiling, setIsCompiling] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [usage, setUsage] = useState<Usage | null>(null)
@@ -35,25 +36,28 @@ export default function CompilePage() {
     fetch('/api/profile')
       .then((r) => r.json())
       .then((data) => {
-        if (data.profile) {
-          setUsage({
-            used: data.profile.compilations_used,
-            limit: data.profile.compilations_limit,
-          })
-        }
+        if (data.profile) setUsage({ used: data.profile.compilations_used, limit: data.profile.compilations_limit })
       })
       .catch(() => null)
   }, [])
 
-  // Reset template when intent changes
   function handleIntentSelect(newIntent: IntentType) {
     setIntent(newIntent)
     setTemplateId(null)
   }
 
+  function handleUrlAdded(fileId: string) {
+    setUrlFileIds((prev) => [...prev, fileId])
+  }
+
+  function handleUrlRemoved(fileId: string) {
+    setUrlFileIds((prev) => prev.filter((id) => id !== fileId))
+  }
+
   const uploadedFiles = files.filter((f) => f.storageId)
+  const allFileIds = [...uploadedFiles.map((f) => f.storageId as string), ...urlFileIds]
   const atLimit = usage ? usage.used >= usage.limit : false
-  const canSubmit = uploadedFiles.length > 0 && intent !== null && !isCompiling && !atLimit
+  const canSubmit = allFileIds.length > 0 && intent !== null && !isCompiling && !atLimit
   const availableTemplates = intent ? getTemplatesForIntent(intent) : []
 
   async function handleCompile() {
@@ -65,11 +69,7 @@ export default function CompilePage() {
       const res = await fetch('/api/compile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fileIds: uploadedFiles.map((f) => f.storageId),
-          intent,
-          templateId: templateId ?? undefined,
-        }),
+        body: JSON.stringify({ fileIds: allFileIds, intent, templateId: templateId ?? undefined, messyNotes }),
       })
 
       const data = await res.json()
@@ -94,19 +94,21 @@ export default function CompilePage() {
           <h1 className="text-3xl font-bold text-gray-900 mb-1">Compile</h1>
           <p className="text-gray-500">Upload your notes, choose an output type, and let AI do the rest.</p>
         </div>
-        {usage && (
-          <div className="w-52 shrink-0">
-            <UsageBanner used={usage.used} limit={usage.limit} />
-          </div>
-        )}
+        {usage && <div className="w-52 shrink-0"><UsageBanner used={usage.used} limit={usage.limit} /></div>}
       </div>
 
-      {/* Step 1 — Upload */}
+      {/* Step 1 — Sources */}
       <section className="mb-10">
         <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-          1 — Upload Files
+          1 — Add Sources
         </h2>
         <FileUploader onFilesChange={setFiles} />
+        <div className="flex items-center gap-3 my-4">
+          <div className="flex-1 h-px bg-gray-200" />
+          <span className="text-xs text-gray-400 font-medium">or add a URL</span>
+          <div className="flex-1 h-px bg-gray-200" />
+        </div>
+        <UrlIngester onUrlAdded={handleUrlAdded} onUrlRemoved={handleUrlRemoved} />
       </section>
 
       {/* Step 2 — Intent */}
@@ -117,25 +119,28 @@ export default function CompilePage() {
         <IntentEngine selected={intent} onSelect={handleIntentSelect} />
       </section>
 
-      {/* Step 3 — Template (conditional) */}
+      {/* Step 3 — Template */}
       {availableTemplates.length > 0 && (
         <section className="mb-10">
-          <TemplateSelector
-            templates={availableTemplates}
-            selected={templateId}
-            onSelect={setTemplateId}
-          />
+          <TemplateSelector templates={availableTemplates} selected={templateId} onSelect={setTemplateId} />
         </section>
       )}
 
-      {/* Submission summary */}
+      {/* Step 4 — Options */}
+      <section className="mb-10">
+        <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+          {availableTemplates.length > 0 ? '4' : '3'} — Options
+        </h2>
+        <MessyNotesToggle enabled={messyNotes} onChange={setMessyNotes} />
+      </section>
+
+      {/* Summary */}
       {canSubmit && intent && (
         <div className="mb-4 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-600">
-          {uploadedFiles.length} file{uploadedFiles.length !== 1 ? 's' : ''} uploaded · Intent:{' '}
+          {allFileIds.length} source{allFileIds.length !== 1 ? 's' : ''} · Intent:{' '}
           <span className="font-semibold text-gray-900">{INTENT_LABELS[intent]}</span>
-          {templateId && (
-            <> · Template: <span className="font-semibold text-gray-900">{templateId.replace('_', ' ')}</span></>
-          )}
+          {templateId && <> · <span className="font-semibold text-gray-900">{templateId.replace('_', ' ')}</span></>}
+          {messyNotes && <> · <span className="font-semibold text-gray-900">Messy Notes Mode</span></>}
         </div>
       )}
 

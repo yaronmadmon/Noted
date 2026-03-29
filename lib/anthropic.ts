@@ -1,15 +1,17 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { IntentType, CompilationOutput } from '@/types'
 import { buildCompilePrompt } from './prompts'
+import { StitchReport } from './stitchIdeas'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
 export async function compileNotes(
   sourceTexts: { fileName: string; text: string }[],
   intent: IntentType,
-  templateId?: string
+  templateId?: string,
+  stitchReport?: StitchReport
 ): Promise<CompilationOutput> {
-  const prompt = buildCompilePrompt(intent, sourceTexts, templateId)
+  const prompt = buildCompilePrompt(intent, sourceTexts, templateId, stitchReport)
 
   const message = await client.messages.create({
     model: 'claude-sonnet-4-20250514',
@@ -18,12 +20,8 @@ export async function compileNotes(
   })
 
   const raw = message.content[0]
-  if (raw.type !== 'text') {
-    throw new Error('Unexpected response type from Claude')
-  }
+  if (raw.type !== 'text') throw new Error('Unexpected response type from Claude')
 
-  // Strip markdown fences if Claude wraps the JSON anyway
   const cleaned = raw.text.replace(/^```(?:json)?\n?/i, '').replace(/\n?```$/i, '').trim()
-
   return JSON.parse(cleaned) as CompilationOutput
 }

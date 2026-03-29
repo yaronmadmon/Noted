@@ -1,7 +1,7 @@
 import { FileCategory } from './fileHelpers'
+import { transcribeAudio } from './transcribeAudio'
 
-const VISION_API_URL =
-  'https://vision.googleapis.com/v1/images:annotate'
+const VISION_API_URL = 'https://vision.googleapis.com/v1/images:annotate'
 
 export async function extractTextFromBuffer(
   buffer: Buffer,
@@ -16,7 +16,10 @@ export async function extractTextFromBuffer(
     case 'pdf':
       return extractFromPdf(buffer)
     case 'audio':
-      return '[Audio transcription not yet available — please provide a text transcript]'
+      return transcribeAudio(buffer, mimeType)
+    case 'url':
+      // URL sources have extracted_text pre-populated — this path is never reached
+      return buffer.toString('utf-8')
     default:
       return buffer.toString('utf-8')
   }
@@ -41,21 +44,15 @@ async function extractViaGoogleVision(buffer: Buffer): Promise<string> {
     }),
   })
 
-  if (!res.ok) {
-    throw new Error(`Google Vision API error: ${res.statusText}`)
-  }
+  if (!res.ok) throw new Error(`Google Vision API error: ${res.statusText}`)
 
   const data = await res.json()
-  const text: string =
-    data.responses?.[0]?.fullTextAnnotation?.text ?? ''
-
+  const text: string = data.responses?.[0]?.fullTextAnnotation?.text ?? ''
   if (!text) throw new Error('No text detected in image')
   return text
 }
 
 async function extractFromPdf(buffer: Buffer): Promise<string> {
-  // Basic PDF text extraction — reads raw text streams from the PDF binary.
-  // For production, replace with a proper PDF parsing library.
   const content = buffer.toString('latin1')
   const matches = content.match(/BT[\s\S]*?ET/g) ?? []
 

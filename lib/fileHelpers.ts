@@ -1,4 +1,4 @@
-export type FileCategory = 'image' | 'pdf' | 'text' | 'audio'
+export type FileCategory = 'image' | 'pdf' | 'text' | 'audio' | 'url'
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 
