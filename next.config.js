@@ -3,7 +3,9 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ['pdf-parse'],
+  experimental: {
+    serverComponentsExternalPackages: ['pdf-parse'],
+  },
 }
 
 module.exports = withNextIntl(nextConfig)
