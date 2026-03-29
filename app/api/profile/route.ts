@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { NextRequest, NextResponse } from 'next/server'
 import { getOrCreateProfile } from '@/lib/usage'
 import { v4 as uuidv4 } from 'uuid'
