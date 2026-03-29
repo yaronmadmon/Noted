@@ -1,9 +1,9 @@
-import Anthropic from '@anthropic-ai/sdk'
+import OpenAI from 'openai'
 import { IntentType, CompilationOutput } from '@/types'
 import { buildCompilePrompt } from './prompts'
 import { StitchReport } from './stitchIdeas'
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! })
 
 export async function compileNotes(
   sourceTexts: { fileName: string; text: string }[],
@@ -13,15 +13,15 @@ export async function compileNotes(
 ): Promise<CompilationOutput> {
   const prompt = buildCompilePrompt(intent, sourceTexts, templateId, stitchReport)
 
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+  const response = await client.chat.completions.create({
+    model: 'gpt-4o',
     max_tokens: 4000,
+    response_format: { type: 'json_object' },
     messages: [{ role: 'user', content: prompt }],
   })
 
-  const raw = message.content[0]
-  if (raw.type !== 'text') throw new Error('Unexpected response type from Claude')
+  const raw = response.choices[0]?.message?.content
+  if (!raw) throw new Error('No response from OpenAI')
 
-  const cleaned = raw.text.replace(/^```(?:json)?\n?/i, '').replace(/\n?```$/i, '').trim()
-  return JSON.parse(cleaned) as CompilationOutput
+  return JSON.parse(raw) as CompilationOutput
 }

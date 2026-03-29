@@ -1,6 +1,6 @@
-import Anthropic from '@anthropic-ai/sdk'
+import OpenAI from 'openai'
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! })
 
 const BULLET_RE = /^[\s]*[-*•>]/m
 const SHORT_LINE_RE = /^.{0,30}$/m
@@ -26,8 +26,8 @@ function messinessScore(text: string): number {
 export async function cleanMessyNotes(text: string): Promise<string> {
   if (messinessScore(text) < 0.3) return text
 
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+  const response = await client.chat.completions.create({
+    model: 'gpt-4o',
     max_tokens: 2000,
     messages: [
       {
@@ -43,6 +43,5 @@ ${text}`,
     ],
   })
 
-  const raw = message.content[0]
-  return raw.type === 'text' ? raw.text.trim() : text
+  return response.choices[0]?.message?.content?.trim() ?? text
 }
