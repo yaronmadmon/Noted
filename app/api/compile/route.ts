@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createServerClient } from '@supabase/ssr'
 import { supabaseAdmin } from '@/lib/supabaseServer'
 import { extractTextFromBuffer } from '@/lib/extractText'
 import { getFileType } from '@/lib/fileHelpers'
@@ -10,27 +11,49 @@ import { v4 as uuidv4 } from 'uuid'
 interface CompileRequestBody {
   fileIds: string[]
   intent: IntentType
+  templateId?: string
 }
 
 export async function POST(req: NextRequest) {
-  // 1. Usage check
-  let sessionId = req.cookies.get('session_id')?.value
-  if (!sessionId) sessionId = uuidv4()
+  // 1. Get authenticated user
+  let response = NextResponse.next({ request: req })
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll: () => req.cookies.getAll(),
+        setAll: (cookiesToSet) => {
+          cookiesToSet.forEach(({ name, value }) => req.cookies.set(name, value))
+          response = NextResponse.next({ request: req })
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options)
+          )
+        },
+      },
+    }
+  )
 
-  const { allowed, profile } = await checkAndIncrementUsage(sessionId)
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  // 2. Usage check
+  const { allowed, profile } = await checkAndIncrementUsage(user.id, user.email ?? '')
 
   if (!allowed) {
     return NextResponse.json(
       {
-        error: `Free tier limit reached (${profile.compilations_limit} compilations/month).`,
+        error: 'Monthly limit reached',
         usage: { used: profile.compilations_used, limit: profile.compilations_limit },
       },
-      { status: 429 }
+      { status: 403 }
     )
   }
 
   const body: CompileRequestBody = await req.json()
-  const { fileIds, intent } = body
+  const { fileIds, intent, templateId } = body
 
   if (!fileIds?.length) {
     return NextResponse.json({ error: 'No files provided' }, { status: 400 })
@@ -39,7 +62,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No intent provided' }, { status: 400 })
   }
 
-  // 2. Load source file records from DB
+  // 3. Load source file records
   const { data: sourceFiles, error: dbError } = await supabaseAdmin
     .from('source_files')
     .select('*')
@@ -49,7 +72,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Files not found' }, { status: 404 })
   }
 
-  // 3. Download each file and extract text
+  // 4. Download and extract text
   const sources: { fileName: string; text: string }[] = []
 
   for (const record of sourceFiles) {
@@ -64,8 +87,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const arrayBuffer = await fileData.arrayBuffer()
-    const buffer = Buffer.from(arrayBuffer)
+    const buffer = Buffer.from(await fileData.arrayBuffer())
     const fileType = getFileType({ type: record.file_type } as File)
 
     let text = record.extracted_text
@@ -80,14 +102,16 @@ export async function POST(req: NextRequest) {
     sources.push({ fileName: record.file_name, text })
   }
 
-  // 4. Send to Claude
+  // 5. Send to Claude
+  const compilationId = uuidv4()
   let output
+
   try {
-    output = await compileNotes(sources, intent)
+    output = await compileNotes(sources, intent, templateId)
   } catch (err) {
     await supabaseAdmin.from('compilations').insert({
-      id: uuidv4(),
-      user_id: sessionId,
+      id: compilationId,
+      user_id: user.id,
       intent,
       status: 'failed',
       output: null,
@@ -98,11 +122,10 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // 5. Save compilation result to DB
-  const compilationId = uuidv4()
+  // 6. Save result
   const { error: saveError } = await supabaseAdmin.from('compilations').insert({
     id: compilationId,
-    user_id: sessionId,
+    user_id: user.id,
     intent,
     status: 'complete',
     output,
@@ -110,7 +133,7 @@ export async function POST(req: NextRequest) {
 
   if (saveError) {
     return NextResponse.json(
-      { error: `Failed to save compilation: ${saveError.message}` },
+      { error: `Failed to save: ${saveError.message}` },
       { status: 500 }
     )
   }
@@ -120,19 +143,9 @@ export async function POST(req: NextRequest) {
     .update({ compilation_id: compilationId })
     .in('id', fileIds)
 
-  const res = NextResponse.json({
+  return NextResponse.json({
     compilationId,
     output,
     usage: { used: profile.compilations_used, limit: profile.compilations_limit },
   })
-
-  // Set session cookie if new
-  res.cookies.set('session_id', sessionId, {
-    httpOnly: true,
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 365,
-    path: '/',
-  })
-
-  return res
 }

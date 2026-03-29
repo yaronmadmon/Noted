@@ -6,9 +6,10 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
 export async function compileNotes(
   sourceTexts: { fileName: string; text: string }[],
-  intent: IntentType
+  intent: IntentType,
+  templateId?: string
 ): Promise<CompilationOutput> {
-  const prompt = buildCompilePrompt(intent, sourceTexts)
+  const prompt = buildCompilePrompt(intent, sourceTexts, templateId)
 
   const message = await client.messages.create({
     model: 'claude-sonnet-4-20250514',

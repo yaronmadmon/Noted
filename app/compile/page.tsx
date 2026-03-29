@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import FileUploader, { UploadedFile } from '@/components/FileUploader'
 import IntentEngine from '@/components/IntentEngine'
+import TemplateSelector from '@/components/TemplateSelector'
 import SubmitButton from '@/components/SubmitButton'
-import CompilationResult from '@/components/CompilationResult'
-import UsageBar from '@/components/UsageBar'
-import { IntentType, CompilationOutput } from '@/types'
+import UsageBanner from '@/components/UsageBanner'
+import { getTemplatesForIntent } from '@/lib/templates'
+import { IntentType } from '@/types'
 
 const INTENT_LABELS: Record<IntentType, string> = {
   study: 'Study Guide',
@@ -21,10 +23,11 @@ interface Usage {
 }
 
 export default function CompilePage() {
+  const router = useRouter()
   const [files, setFiles] = useState<UploadedFile[]>([])
   const [intent, setIntent] = useState<IntentType | null>(null)
+  const [templateId, setTemplateId] = useState<string | null>(null)
   const [isCompiling, setIsCompiling] = useState(false)
-  const [output, setOutput] = useState<CompilationOutput | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [usage, setUsage] = useState<Usage | null>(null)
 
@@ -42,15 +45,21 @@ export default function CompilePage() {
       .catch(() => null)
   }, [])
 
+  // Reset template when intent changes
+  function handleIntentSelect(newIntent: IntentType) {
+    setIntent(newIntent)
+    setTemplateId(null)
+  }
+
   const uploadedFiles = files.filter((f) => f.storageId)
   const atLimit = usage ? usage.used >= usage.limit : false
   const canSubmit = uploadedFiles.length > 0 && intent !== null && !isCompiling && !atLimit
+  const availableTemplates = intent ? getTemplatesForIntent(intent) : []
 
   async function handleCompile() {
     if (!canSubmit || !intent) return
     setIsCompiling(true)
     setError(null)
-    setOutput(null)
 
     try {
       const res = await fetch('/api/compile', {
@@ -59,6 +68,7 @@ export default function CompilePage() {
         body: JSON.stringify({
           fileIds: uploadedFiles.map((f) => f.storageId),
           intent,
+          templateId: templateId ?? undefined,
         }),
       })
 
@@ -67,13 +77,12 @@ export default function CompilePage() {
       if (!res.ok) {
         setError(data.error ?? 'Compilation failed')
         if (data.usage) setUsage(data.usage)
+        setIsCompiling(false)
       } else {
-        setOutput(data.output)
-        if (data.usage) setUsage(data.usage)
+        router.push(`/compile/${data.compilationId}`)
       }
     } catch {
       setError('Network error — please try again')
-    } finally {
       setIsCompiling(false)
     }
   }
@@ -87,7 +96,7 @@ export default function CompilePage() {
         </div>
         {usage && (
           <div className="w-52 shrink-0">
-            <UsageBar used={usage.used} limit={usage.limit} />
+            <UsageBanner used={usage.used} limit={usage.limit} />
           </div>
         )}
       </div>
@@ -105,30 +114,38 @@ export default function CompilePage() {
         <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
           2 — Choose Output Type
         </h2>
-        <IntentEngine selected={intent} onSelect={setIntent} />
+        <IntentEngine selected={intent} onSelect={handleIntentSelect} />
       </section>
+
+      {/* Step 3 — Template (conditional) */}
+      {availableTemplates.length > 0 && (
+        <section className="mb-10">
+          <TemplateSelector
+            templates={availableTemplates}
+            selected={templateId}
+            onSelect={setTemplateId}
+          />
+        </section>
+      )}
 
       {/* Submission summary */}
       {canSubmit && intent && (
         <div className="mb-4 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-600">
           {uploadedFiles.length} file{uploadedFiles.length !== 1 ? 's' : ''} uploaded · Intent:{' '}
           <span className="font-semibold text-gray-900">{INTENT_LABELS[intent]}</span>
+          {templateId && (
+            <> · Template: <span className="font-semibold text-gray-900">{templateId.replace('_', ' ')}</span></>
+          )}
         </div>
       )}
 
-      {/* Submit */}
       <SubmitButton disabled={!canSubmit} loading={isCompiling} onClick={handleCompile} />
 
-      {/* Error */}
       {error && (
         <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
           {error}
         </div>
       )}
-
-      {/* Result */}
-      {isCompiling && <CompilationResult output={{ title: '', sections: [], summary: '' }} isLoading />}
-      {output && <CompilationResult output={output} />}
     </div>
   )
 }
