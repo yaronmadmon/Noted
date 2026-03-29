@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "brand": "Compilador de Conocimiento",
+    "dashboard": "Panel",
+    "compile": "Compilar",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión"
+  },
+  "home": {
+    "headline": "Convierte notas desordenadas en trabajo terminado",
+    "subheadline": "Sube notas escritas a mano, PDFs, notas de voz o texto plano. Elige el tipo de salida y deja que la IA compile todo en un documento estructurado y listo para publicar, con cada párrafo rastreado hasta su fuente.",
+    "cta": "Comenzar",
+    "cardStudy": "Guía de Estudio",
+    "cardStudyDesc": "Resúmenes estructurados de notas de clase y lecturas",
+    "cardBrief": "Resumen Ejecutivo",
+    "cardBriefDesc": "Documentos empresariales concisos a partir de investigación y datos",
+    "cardReport": "Informe",
+    "cardReportDesc": "Informes completos compilados desde múltiples archivos fuente"
+  },
+  "auth": {
+    "signIn": "Iniciar sesión",
+    "createAccount": "Crear cuenta",
+    "noAccount": "¿No tienes cuenta?",
+    "hasAccount": "¿Ya tienes cuenta?",
+    "signUp": "Registrarse",
+    "emailLabel": "Correo electrónico",
+    "passwordLabel": "Contraseña",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "confirmEmail": "Revisa tu correo para confirmar tu cuenta y luego inicia sesión.",
+    "pleaseWait": "Por favor espera…",
+    "continueWithGoogle": "Continuar con Google",
+    "or": "o",
+    "somethingWrong": "Algo salió mal"
+  },
+  "compile": {
+    "title": "Compilar",
+    "subtitle": "Sube tus notas, elige el tipo de salida y deja que la IA haga el resto.",
+    "addSources": "1 — Agregar fuentes",
+    "orAddUrl": "o agregar una URL",
+    "chooseOutputType": "2 — Elegir tipo de salida",
+    "options3": "3 — Opciones",
+    "options4": "4 — Opciones",
+    "intentLabel": "Intención:",
+    "messyNotesModeLabel": "Modo Notas Desordenadas",
+    "networkError": "Error de red — por favor intenta de nuevo",
+    "compilationFailed": "Compilación fallida",
+    "source": "{count, plural, one {# fuente} other {# fuentes}}"
+  },
+  "intent": {
+    "study": "Guía de Estudio",
+    "studyDesc": "Convierte notas en guías de estudio, resúmenes y materiales de examen",
+    "business": "Negocios",
+    "businessDesc": "Convierte investigación en informes, propuestas y resúmenes ejecutivos",
+    "book": "Libro",
+    "bookDesc": "Estructura notas en capítulos, esquemas y borradores de manuscritos",
+    "content": "Contenido",
+    "contentDesc": "Transforma ideas en publicaciones de blog, guiones y esquemas de cursos"
+  },
+  "intentLabels": {
+    "study": "Guía de Estudio",
+    "business": "Resumen Ejecutivo",
+    "book": "Libro / Artículo",
+    "content": "Contenido"
+  },
+  "template": {
+    "heading": "3 — Elegir plantilla",
+    "optional": "(opcional)",
+    "clear": "Limpiar"
+  },
+  "fileUploader": {
+    "dropFiles": "Suelta los archivos aquí",
+    "dragDrop": "Arrastra y suelta archivos aquí",
+    "browseHint": "o haz clic para explorar — PDF, imágenes, texto, audio · máx. 10MB cada uno",
+    "uploaded": "Subido"
+  },
+  "urlIngester": {
+    "placeholder": "https://ejemplo.com/articulo",
+    "addUrl": "Agregar URL",
+    "failedToFetch": "No se pudo obtener la URL",
+    "networkError": "Error de red — por favor intenta de nuevo"
+  },
+  "messyNotes": {
+    "title": "Modo Notas Desordenadas",
+    "description": "Reestructura fragmentos y oraciones incompletas antes de compilar"
+  },
+  "submitButton": {
+    "compile": "Compilar mis notas",
+    "compiling": "Compilando..."
+  },
+  "usage": {
+    "allUsed": "Has usado todas las {limit} compilaciones gratuitas de este mes",
+    "used": "{used} de {limit} compilaciones gratuitas usadas este mes",
+    "upgrade": "Mejorar plan",
+    "nearLimit": "{remaining, plural, one {Solo # compilación restante este mes} other {Solo # compilaciones restantes este mes}}"
+  },
+  "output": {
+    "newCompilation": "← Nueva compilación",
+    "compiling": "Compilando tus notas…",
+    "failed": "Compilación fallida",
+    "failedDesc": "Algo salió mal. Por favor intenta de nuevo.",
+    "backToCompile": "Volver a compilar",
+    "summary": "Resumen",
+    "exportText": "Exportar como texto"
+  },
+  "sourcePanel": {
+    "title": "Archivos fuente",
+    "sourceLabel": "FUENTE {n}"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "newCompilation": "+ Nueva compilación",
+    "pastCompilations": "Compilaciones anteriores",
+    "noCompilations": "No hay compilaciones aún.",
+    "createFirst": "Crea tu primera"
+  }
+}

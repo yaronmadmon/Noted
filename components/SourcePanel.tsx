@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 interface SourceFile {
   id: string
   file_name: string
@@ -19,10 +21,12 @@ const FILE_TYPE_ICON: Record<string, string> = {
 }
 
 export default function SourcePanel({ sources, activeSource }: SourcePanelProps) {
+  const t = useTranslations('sourcePanel')
+
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
       <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
-        Source Files
+        {t('title')}
       </h3>
       <ul className="space-y-2">
         {sources.map((source, i) => {
@@ -38,7 +42,7 @@ export default function SourcePanel({ sources, activeSource }: SourcePanelProps)
               <span className="text-base">{FILE_TYPE_ICON[source.file_type] ?? '📄'}</span>
               <div className="min-w-0">
                 <p className={`text-xs font-semibold mb-0.5 ${isActive ? 'text-gray-300' : 'text-gray-400'}`}>
-                  {label}
+                  {t('sourceLabel', { n: i + 1 })}
                 </p>
                 <p className={`text-sm truncate font-medium ${isActive ? 'text-white' : 'text-gray-700'}`}>
                   {source.file_name}

@@ -1,40 +1,15 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { IntentType } from '@/types'
 
-interface IntentCard {
-  value: IntentType
-  icon: string
-  title: string
-  description: string
+const INTENT_VALUES: IntentType[] = ['study', 'business', 'book', 'content']
+const INTENT_ICONS: Record<IntentType, string> = {
+  study: '🎓',
+  business: '💼',
+  book: '📖',
+  content: '✏️',
 }
-
-const CARDS: IntentCard[] = [
-  {
-    value: 'study',
-    icon: '🎓',
-    title: 'Study Guide',
-    description: 'Turns notes into study guides, summaries, and exam prep materials',
-  },
-  {
-    value: 'business',
-    icon: '💼',
-    title: 'Business',
-    description: 'Converts research into reports, proposals, and executive briefs',
-  },
-  {
-    value: 'book',
-    icon: '📖',
-    title: 'Book',
-    description: 'Structures notes into chapters, outlines, and manuscript drafts',
-  },
-  {
-    value: 'content',
-    icon: '✏️',
-    title: 'Content',
-    description: 'Transforms ideas into blog posts, scripts, and course outlines',
-  },
-]
 
 interface IntentEngineProps {
   selected: IntentType | null
@@ -42,9 +17,11 @@ interface IntentEngineProps {
 }
 
 export default function IntentEngine({ selected, onSelect }: IntentEngineProps) {
+  const t = useTranslations('intent')
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      {CARDS.map(({ value, icon, title, description }) => {
+      {INTENT_VALUES.map((value) => {
         const isSelected = selected === value
         return (
           <button
@@ -56,10 +33,10 @@ export default function IntentEngine({ selected, onSelect }: IntentEngineProps) 
                 : 'border-gray-200 bg-white hover:border-gray-400 text-gray-900'
             }`}
           >
-            <span className="text-2xl mb-2 block">{icon}</span>
-            <p className="font-semibold text-sm mb-1">{title}</p>
+            <span className="text-2xl mb-2 block">{INTENT_ICONS[value]}</span>
+            <p className="font-semibold text-sm mb-1">{t(value)}</p>
             <p className={`text-xs leading-relaxed ${isSelected ? 'text-gray-300' : 'text-gray-400'}`}>
-              {description}
+              {t(`${value}Desc`)}
             </p>
           </button>
         )

@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "brand": "מהדר ידע",
+    "dashboard": "לוח בקרה",
+    "compile": "הידור",
+    "signIn": "כניסה",
+    "signOut": "יציאה"
+  },
+  "home": {
+    "headline": "הפוך רשימות מבולגנות לעבודה מוגמרת",
+    "subheadline": "העלה הערות בכתב יד, PDF, הודעות קוליות או טקסט רגיל. בחר את סוג הפלט ותן ל-AI לרכז הכל למסמך מובנה ומוכן לפרסום — כל פסקה מקושרת למקורה.",
+    "cta": "להתחיל",
+    "cardStudy": "מדריך למידה",
+    "cardStudyDesc": "סיכומים מובנים מהרצאות וקריאות",
+    "cardBrief": "תקציר מנהלים",
+    "cardBriefDesc": "מסמכים עסקיים תמציתיים מנתונים ומחקר",
+    "cardReport": "דוח",
+    "cardReportDesc": "דוחות מלאים המורכבים ממספר קבצי מקור"
+  },
+  "auth": {
+    "signIn": "כניסה",
+    "createAccount": "יצירת חשבון",
+    "noAccount": "אין לך חשבון?",
+    "hasAccount": "כבר יש לך חשבון?",
+    "signUp": "הרשמה",
+    "emailLabel": "אימייל",
+    "passwordLabel": "סיסמה",
+    "emailPlaceholder": "you@example.com",
+    "confirmEmail": "בדוק את האימייל לאישור החשבון ואז היכנס.",
+    "pleaseWait": "אנא המתן…",
+    "continueWithGoogle": "המשך עם Google",
+    "or": "או",
+    "somethingWrong": "משהו השתבש"
+  },
+  "compile": {
+    "title": "הידור",
+    "subtitle": "העלה את ההערות שלך, בחר סוג פלט ותן ל-AI לעשות את השאר.",
+    "addSources": "1 — הוסף מקורות",
+    "orAddUrl": "או הוסף כתובת URL",
+    "chooseOutputType": "2 — בחר סוג פלט",
+    "options3": "3 — אפשרויות",
+    "options4": "4 — אפשרויות",
+    "intentLabel": "כוונה:",
+    "messyNotesModeLabel": "מצב הערות מבולגנות",
+    "networkError": "שגיאת רשת — נסה שוב",
+    "compilationFailed": "ההידור נכשל",
+    "source": "{count, plural, one {# מקור} other {# מקורות}}"
+  },
+  "intent": {
+    "study": "מדריך למידה",
+    "studyDesc": "הופך הערות למדריכי לימוד, סיכומים וחומרי הכנה לבחינות",
+    "business": "עסקים",
+    "businessDesc": "ממיר מחקר לדוחות, הצעות ותקצירי מנהלים",
+    "book": "ספר",
+    "bookDesc": "מארגן הערות לפרקים, מתארים וטיוטות כתב יד",
+    "content": "תוכן",
+    "contentDesc": "הופך רעיונות לפוסטים בבלוג, תסריטים ומתארי קורסים"
+  },
+  "intentLabels": {
+    "study": "מדריך למידה",
+    "business": "תקציר עסקי",
+    "book": "ספר / מאמר",
+    "content": "תוכן"
+  },
+  "template": {
+    "heading": "3 — בחר תבנית",
+    "optional": "(אופציונלי)",
+    "clear": "נקה"
+  },
+  "fileUploader": {
+    "dropFiles": "שחרר קבצים כאן",
+    "dragDrop": "גרור ושחרר קבצים כאן",
+    "browseHint": "או לחץ לעיון — PDF, תמונות, טקסט, שמע · עד 10MB לכל קובץ",
+    "uploaded": "הועלה"
+  },
+  "urlIngester": {
+    "placeholder": "https://example.com/article",
+    "addUrl": "הוסף URL",
+    "failedToFetch": "לא ניתן לטעון את ה-URL",
+    "networkError": "שגיאת רשת — נסה שוב"
+  },
+  "messyNotes": {
+    "title": "מצב הערות מבולגנות",
+    "description": "מארגן מחדש רשימות חלקיות ומשפטים לא שלמים לפני ההידור"
+  },
+  "submitButton": {
+    "compile": "הידור ההערות שלי",
+    "compiling": "מהדר..."
+  },
+  "usage": {
+    "allUsed": "השתמשת בכל {limit} ההידורים החינמיים החודש",
+    "used": "{used} מתוך {limit} הידורים חינמיים שימשו החודש",
+    "upgrade": "שדרג",
+    "nearLimit": "{remaining, plural, one {נותר # הידור בלבד החודש} other {נותרו # הידורים בלבד החודש}}"
+  },
+  "output": {
+    "newCompilation": "→ הידור חדש",
+    "compiling": "מהדר את ההערות שלך…",
+    "failed": "ההידור נכשל",
+    "failedDesc": "משהו השתבש. נסה שוב.",
+    "backToCompile": "חזרה להידור",
+    "summary": "סיכום",
+    "exportText": "ייצוא כטקסט"
+  },
+  "sourcePanel": {
+    "title": "קבצי מקור",
+    "sourceLabel": "מקור {n}"
+  },
+  "dashboard": {
+    "title": "לוח בקרה",
+    "newCompilation": "+ הידור חדש",
+    "pastCompilations": "הידורים קודמים",
+    "noCompilations": "אין הידורים עדיין.",
+    "createFirst": "צור את הראשון"
+  }
+}

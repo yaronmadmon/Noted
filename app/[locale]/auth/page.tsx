@@ -2,10 +2,12 @@
 
 import { useState } from 'react'
 import { createBrowserClient } from '@supabase/ssr'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/lib/navigation'
+import { useTranslations } from 'next-intl'
 
 export default function AuthPage() {
   const router = useRouter()
+  const t = useTranslations('auth')
   const [mode, setMode] = useState<'signin' | 'signup'>('signin')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -28,7 +30,7 @@ export default function AuthPage() {
       if (mode === 'signup') {
         const { error } = await supabase.auth.signUp({ email, password })
         if (error) throw error
-        setMessage('Check your email to confirm your account, then sign in.')
+        setMessage(t('confirmEmail'))
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) throw error
@@ -36,7 +38,7 @@ export default function AuthPage() {
         router.refresh()
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong')
+      setError(err instanceof Error ? err.message : t('somethingWrong'))
     } finally {
       setLoading(false)
     }
@@ -46,15 +48,15 @@ export default function AuthPage() {
     <div className="flex items-center justify-center min-h-[calc(100vh-65px)] px-4">
       <div className="w-full max-w-sm bg-white border border-gray-100 rounded-2xl shadow-sm p-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-1">
-          {mode === 'signin' ? 'Sign in' : 'Create account'}
+          {mode === 'signin' ? t('signIn') : t('createAccount')}
         </h1>
         <p className="text-sm text-gray-400 mb-6">
-          {mode === 'signin' ? "Don't have an account? " : 'Already have an account? '}
+          {mode === 'signin' ? t('noAccount') : t('hasAccount')}{' '}
           <button
             onClick={() => { setMode(mode === 'signin' ? 'signup' : 'signin'); setError(null); setMessage(null) }}
             className="text-gray-700 underline underline-offset-2 hover:text-gray-900"
           >
-            {mode === 'signin' ? 'Sign up' : 'Sign in'}
+            {mode === 'signin' ? t('signUp') : t('signIn')}
           </button>
         </p>
 
@@ -79,29 +81,29 @@ export default function AuthPage() {
             <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332Z" fill="#FBBC05"/>
             <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58Z" fill="#EA4335"/>
           </svg>
-          Continue with Google
+          {t('continueWithGoogle')}
         </button>
 
         <div className="flex items-center gap-3 mb-4">
           <div className="flex-1 h-px bg-gray-100" />
-          <span className="text-xs text-gray-400">or</span>
+          <span className="text-xs text-gray-400">{t('or')}</span>
           <div className="flex-1 h-px bg-gray-100" />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('emailLabel')}</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-              placeholder="you@example.com"
+              placeholder={t('emailPlaceholder')}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('passwordLabel')}</label>
             <input
               type="password"
               value={password}
@@ -133,7 +135,7 @@ export default function AuthPage() {
                 : 'bg-gray-900 text-white hover:bg-gray-700'
             }`}
           >
-            {loading ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
+            {loading ? t('pleaseWait') : mode === 'signin' ? t('signIn') : t('createAccount')}
           </button>
         </form>
       </div>

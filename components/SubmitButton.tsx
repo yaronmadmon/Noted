@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import Spinner from './Spinner'
 
 interface SubmitButtonProps {
@@ -9,6 +10,8 @@ interface SubmitButtonProps {
 }
 
 export default function SubmitButton({ disabled, loading, onClick }: SubmitButtonProps) {
+  const t = useTranslations('submitButton')
+
   return (
     <button
       onClick={onClick}
@@ -22,10 +25,10 @@ export default function SubmitButton({ disabled, loading, onClick }: SubmitButto
       {loading ? (
         <>
           <Spinner size="sm" className="border-gray-300 border-t-gray-400" />
-          Compiling...
+          {t('compiling')}
         </>
       ) : (
-        'Compile My Notes'
+        t('compile')
       )}
     </button>
   )

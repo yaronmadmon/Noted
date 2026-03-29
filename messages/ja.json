@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "brand": "ナレッジコンパイラー",
+    "dashboard": "ダッシュボード",
+    "compile": "コンパイル",
+    "signIn": "サインイン",
+    "signOut": "サインアウト"
+  },
+  "home": {
+    "headline": "散らかったメモを完成した成果物に変える",
+    "subheadline": "手書きメモ、PDF、音声メモ、またはプレーンテキストをアップロード。出力タイプを選択し、AIがすべてを構造化された公開可能なドキュメントにまとめます — 各段落はソースにトレースバック可能。",
+    "cta": "始める",
+    "cardStudy": "学習ガイド",
+    "cardStudyDesc": "講義ノートや読書から構造化された要約を作成",
+    "cardBrief": "エグゼクティブブリーフ",
+    "cardBriefDesc": "調査とデータから簡潔なビジネス文書を作成",
+    "cardReport": "レポート",
+    "cardReportDesc": "複数のソースファイルから完全なレポートを作成"
+  },
+  "auth": {
+    "signIn": "サインイン",
+    "createAccount": "アカウント作成",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "hasAccount": "すでにアカウントをお持ちですか？",
+    "signUp": "サインアップ",
+    "emailLabel": "メールアドレス",
+    "passwordLabel": "パスワード",
+    "emailPlaceholder": "you@example.com",
+    "confirmEmail": "メールを確認してアカウントを認証してから、サインインしてください。",
+    "pleaseWait": "しばらくお待ちください…",
+    "continueWithGoogle": "Googleで続ける",
+    "or": "または",
+    "somethingWrong": "エラーが発生しました"
+  },
+  "compile": {
+    "title": "コンパイル",
+    "subtitle": "メモをアップロードし、出力タイプを選択して、残りはAIに任せてください。",
+    "addSources": "1 — ソースを追加",
+    "orAddUrl": "またはURLを追加",
+    "chooseOutputType": "2 — 出力タイプを選択",
+    "options3": "3 — オプション",
+    "options4": "4 — オプション",
+    "intentLabel": "目的：",
+    "messyNotesModeLabel": "散らかったメモモード",
+    "networkError": "ネットワークエラー — もう一度お試しください",
+    "compilationFailed": "コンパイル失敗",
+    "source": "{count, plural, other {# ソース}}"
+  },
+  "intent": {
+    "study": "学習ガイド",
+    "studyDesc": "メモを学習ガイド、要約、試験対策資料に変換",
+    "business": "ビジネス",
+    "businessDesc": "調査をレポート、提案書、エグゼクティブブリーフに変換",
+    "book": "書籍",
+    "bookDesc": "メモを章、アウトライン、原稿草稿に整理",
+    "content": "コンテンツ",
+    "contentDesc": "アイデアをブログ記事、スクリプト、コースアウトラインに変換"
+  },
+  "intentLabels": {
+    "study": "学習ガイド",
+    "business": "ビジネスブリーフ",
+    "book": "書籍 / 記事",
+    "content": "コンテンツ"
+  },
+  "template": {
+    "heading": "3 — テンプレートを選択",
+    "optional": "（任意）",
+    "clear": "クリア"
+  },
+  "fileUploader": {
+    "dropFiles": "ここにファイルをドロップ",
+    "dragDrop": "ここにファイルをドラッグ＆ドロップ",
+    "browseHint": "またはクリックして参照 — PDF、画像、テキスト、音声 · 各最大10MB",
+    "uploaded": "アップロード完了"
+  },
+  "urlIngester": {
+    "placeholder": "https://example.com/article",
+    "addUrl": "URLを追加",
+    "failedToFetch": "URLの取得に失敗しました",
+    "networkError": "ネットワークエラー — もう一度お試しください"
+  },
+  "messyNotes": {
+    "title": "散らかったメモモード",
+    "description": "コンパイル前に断片的な箇条書きや不完全な文を再構成します"
+  },
+  "submitButton": {
+    "compile": "メモをコンパイル",
+    "compiling": "コンパイル中..."
+  },
+  "usage": {
+    "allUsed": "今月の無料コンパイル {limit} 回をすべて使用しました",
+    "used": "今月 {used}/{limit} 回の無料コンパイルを使用済み",
+    "upgrade": "アップグレード",
+    "nearLimit": "{remaining, plural, other {今月残り # 回のコンパイル}}"
+  },
+  "output": {
+    "newCompilation": "← 新しいコンパイル",
+    "compiling": "メモをコンパイル中…",
+    "failed": "コンパイル失敗",
+    "failedDesc": "エラーが発生しました。もう一度お試しください。",
+    "backToCompile": "コンパイルに戻る",
+    "summary": "要約",
+    "exportText": "テキストとしてエクスポート"
+  },
+  "sourcePanel": {
+    "title": "ソースファイル",
+    "sourceLabel": "ソース {n}"
+  },
+  "dashboard": {
+    "title": "ダッシュボード",
+    "newCompilation": "+ 新しいコンパイル",
+    "pastCompilations": "過去のコンパイル",
+    "noCompilations": "コンパイルはまだありません。",
+    "createFirst": "最初のものを作成"
+  }
+}

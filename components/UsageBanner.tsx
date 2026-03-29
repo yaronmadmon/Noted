@@ -1,11 +1,14 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 interface UsageBannerProps {
   used: number
   limit: number
 }
 
 export default function UsageBanner({ used, limit }: UsageBannerProps) {
+  const t = useTranslations('usage')
   const pct = Math.min((used / limit) * 100, 100)
   const remaining = limit - used
   const atLimit = remaining <= 0
@@ -23,13 +26,11 @@ export default function UsageBanner({ used, limit }: UsageBannerProps) {
     >
       <div className="flex items-center justify-between mb-2">
         <p className={`text-sm font-medium ${atLimit ? 'text-red-700' : nearLimit ? 'text-amber-700' : 'text-gray-700'}`}>
-          {atLimit
-            ? `You have used all ${limit} free compilations this month`
-            : `${used} of ${limit} free compilations used this month`}
+          {atLimit ? t('allUsed', { limit }) : t('used', { used, limit })}
         </p>
         {atLimit && (
           <button className="text-xs font-semibold bg-gray-900 text-white px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors">
-            Upgrade
+            {t('upgrade')}
           </button>
         )}
       </div>
@@ -43,7 +44,7 @@ export default function UsageBanner({ used, limit }: UsageBannerProps) {
       </div>
       {nearLimit && !atLimit && (
         <p className="text-xs text-amber-600 mt-1.5">
-          Only {remaining} compilation{remaining !== 1 ? 's' : ''} remaining this month
+          {t('nearLimit', { remaining })}
         </p>
       )}
     </div>

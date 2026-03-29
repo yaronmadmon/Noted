@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
   const code = searchParams.get('code')
 
   if (code) {
-    const response = NextResponse.redirect(`${origin}/compile`)
+    const response = NextResponse.redirect(`${origin}/en/compile`)
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -27,5 +27,5 @@ export async function GET(req: NextRequest) {
     if (!error) return response
   }
 
-  return NextResponse.redirect(`${origin}/auth?error=oauth_failed`)
+  return NextResponse.redirect(`${origin}/en/auth?error=oauth_failed`)
 }

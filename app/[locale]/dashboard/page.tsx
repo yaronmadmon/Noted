@@ -1,17 +1,11 @@
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { getCurrentUser } from '@/lib/auth'
 import { getUserUsage } from '@/lib/usage'
 import { supabaseAdmin } from '@/lib/supabaseServer'
 import UsageBanner from '@/components/UsageBanner'
+import { Link } from '@/lib/navigation'
 import { IntentType } from '@/types'
-
-const INTENT_LABELS: Record<IntentType, string> = {
-  study: 'Study Guide',
-  business: 'Business Brief',
-  book: 'Book / Article',
-  content: 'Content',
-}
 
 const INTENT_ICONS: Record<IntentType, string> = {
   study: '🎓',
@@ -28,9 +22,17 @@ function formatDate(iso: string) {
   })
 }
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
   const user = await getCurrentUser()
-  if (!user) redirect('/auth')
+  if (!user) redirect(`/${locale}/auth`)
+
+  const t = await getTranslations('dashboard')
+  const tIntentLabels = await getTranslations('intentLabels')
 
   const [usage, { data: compilations }] = await Promise.all([
     getUserUsage(user.id),
@@ -46,26 +48,26 @@ export default async function DashboardPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 sm:py-12">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t('title')}</h1>
         <Link
           href="/compile"
           className="text-sm font-medium bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
         >
-          + New compilation
+          {t('newCompilation')}
         </Link>
       </div>
 
       <UsageBanner used={usage.used} limit={usage.limit} />
 
       <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
-        Past compilations
+        {t('pastCompilations')}
       </h2>
 
       {!compilations?.length ? (
         <div className="bg-white border border-gray-100 rounded-xl p-10 text-center">
-          <p className="text-gray-400 text-sm">No compilations yet.</p>
+          <p className="text-gray-400 text-sm">{t('noCompilations')}</p>
           <Link href="/compile" className="mt-3 inline-block text-sm text-gray-700 underline underline-offset-2">
-            Create your first one
+            {t('createFirst')}
           </Link>
         </div>
       ) : (
@@ -82,7 +84,7 @@ export default async function DashboardPage() {
                   <span className="text-2xl">{INTENT_ICONS[intent] ?? '📄'}</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">{title}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{INTENT_LABELS[intent]}</p>
+                    <p className="text-xs text-gray-400 mt-0.5">{tIntentLabels(intent)}</p>
                   </div>
                   <p className="text-xs text-gray-400 shrink-0">{formatDate(c.created_at)}</p>
                 </Link>

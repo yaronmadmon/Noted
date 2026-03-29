@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { OutputTemplate } from '@/lib/templates'
 
 interface TemplateSelectorProps {
@@ -13,20 +14,21 @@ export default function TemplateSelector({
   selected,
   onSelect,
 }: TemplateSelectorProps) {
+  const t = useTranslations('template')
   if (templates.length === 0) return null
 
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
-          3 — Choose Template <span className="normal-case font-normal text-gray-400">(optional)</span>
+          {t('heading')} <span className="normal-case font-normal text-gray-400">{t('optional')}</span>
         </h2>
         {selected && (
           <button
             onClick={() => onSelect(null)}
             className="text-xs text-gray-400 hover:text-gray-600 underline underline-offset-2"
           >
-            Clear
+            {t('clear')}
           </button>
         )}
       </div>

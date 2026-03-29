@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import Spinner from './Spinner'
 
 interface AddedUrl {
@@ -19,6 +20,7 @@ export default function UrlIngester({ onUrlAdded, onUrlRemoved }: UrlIngesterPro
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [added, setAdded] = useState<AddedUrl[]>([])
+  const t = useTranslations('urlIngester')
 
   async function handleAdd() {
     const url = input.trim()
@@ -34,7 +36,7 @@ export default function UrlIngester({ onUrlAdded, onUrlRemoved }: UrlIngesterPro
       })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error ?? 'Failed to fetch URL')
+        setError(data.error ?? t('failedToFetch'))
       } else {
         const entry: AddedUrl = { fileId: data.fileId, title: data.title, url }
         setAdded((prev) => [...prev, entry])
@@ -42,7 +44,7 @@ export default function UrlIngester({ onUrlAdded, onUrlRemoved }: UrlIngesterPro
         setInput('')
       }
     } catch {
-      setError('Network error — please try again')
+      setError(t('networkError'))
     } finally {
       setLoading(false)
     }
@@ -61,7 +63,7 @@ export default function UrlIngester({ onUrlAdded, onUrlRemoved }: UrlIngesterPro
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && !loading && handleAdd()}
-          placeholder="https://example.com/article"
+          placeholder={t('placeholder')}
           className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
         />
         <button
@@ -73,7 +75,7 @@ export default function UrlIngester({ onUrlAdded, onUrlRemoved }: UrlIngesterPro
               : 'bg-gray-900 text-white hover:bg-gray-700'
           }`}
         >
-          {loading ? <Spinner size="sm" /> : 'Add URL'}
+          {loading ? <Spinner size="sm" /> : t('addUrl')}
         </button>
       </div>
 

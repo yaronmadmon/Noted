@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { CompilationOutput } from '@/types'
 
 interface OutputDocumentProps {
@@ -13,20 +14,19 @@ export default function OutputDocument({
   activeSource,
   onSourceClick,
 }: OutputDocumentProps) {
+  const t = useTranslations('output')
+
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-8">
-      {/* Title */}
       <h1 className="text-2xl font-bold text-gray-900 mb-4">{output.title}</h1>
 
-      {/* Summary */}
       {output.summary && (
         <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-8">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Summary</p>
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{t('summary')}</p>
           <p className="text-gray-700 text-sm leading-relaxed">{output.summary}</p>
         </div>
       )}
 
-      {/* Sections */}
       <div className="space-y-8">
         {output.sections.map((section, i) => (
           <div key={i}>
@@ -35,7 +35,6 @@ export default function OutputDocument({
               {section.content}
             </p>
 
-            {/* Source ref badges */}
             {section.sourceRefs.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {section.sourceRefs.map((ref, j) => (

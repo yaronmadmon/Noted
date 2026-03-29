@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { useTranslations } from 'next-intl'
 import { formatFileSize, validateFile, ACCEPTED_MIME_TYPES, getFileType } from '@/lib/fileHelpers'
 
 export interface UploadedFile {
@@ -25,6 +26,7 @@ const FILE_TYPE_ICON: Record<string, string> = {
 
 export default function FileUploader({ onFilesChange }: FileUploaderProps) {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
+  const t = useTranslations('fileUploader')
 
   const updateFiles = (updated: UploadedFile[]) => {
     setUploadedFiles(updated)
@@ -140,11 +142,9 @@ export default function FileUploader({ onFilesChange }: FileUploaderProps) {
         <input {...getInputProps()} />
         <p className="text-4xl mb-3">📂</p>
         <p className="text-gray-700 font-medium">
-          {isDragActive ? 'Drop files here' : 'Drag & drop files here'}
+          {isDragActive ? t('dropFiles') : t('dragDrop')}
         </p>
-        <p className="text-sm text-gray-400 mt-1">
-          or click to browse — PDF, images, text, audio · max 10MB each
-        </p>
+        <p className="text-sm text-gray-400 mt-1">{t('browseHint')}</p>
       </div>
 
       {uploadedFiles.length > 0 && (
@@ -175,7 +175,7 @@ export default function FileUploader({ onFilesChange }: FileUploaderProps) {
                       />
                     </div>
                   ) : (
-                    <p className="text-xs text-green-600 mt-0.5">Uploaded</p>
+                    <p className="text-xs text-green-600 mt-0.5">{t('uploaded')}</p>
                   )}
                 </div>
                 <button

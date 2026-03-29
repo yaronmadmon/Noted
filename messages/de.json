@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "brand": "Wissens-Compiler",
+    "dashboard": "Dashboard",
+    "compile": "Kompilieren",
+    "signIn": "Anmelden",
+    "signOut": "Abmelden"
+  },
+  "home": {
+    "headline": "Verwandle ungeordnete Notizen in fertige Arbeit",
+    "subheadline": "Lade handschriftliche Notizen, PDFs, Sprachmemos oder einfachen Text hoch. Wähle den Ausgabetyp und lass die KI alles zu einem strukturierten, veröffentlichungsreifen Dokument kompilieren — mit jedem Absatz auf seine Quelle zurückverfolgt.",
+    "cta": "Loslegen",
+    "cardStudy": "Lernhilfe",
+    "cardStudyDesc": "Strukturierte Zusammenfassungen aus Vorlesungsnotizen und Lektüren",
+    "cardBrief": "Kurzreferat",
+    "cardBriefDesc": "Kompakte Geschäftsdokumente aus Recherchen und Daten",
+    "cardReport": "Bericht",
+    "cardReportDesc": "Vollständige Berichte aus mehreren Quelldateien"
+  },
+  "auth": {
+    "signIn": "Anmelden",
+    "createAccount": "Konto erstellen",
+    "noAccount": "Noch kein Konto?",
+    "hasAccount": "Bereits ein Konto?",
+    "signUp": "Registrieren",
+    "emailLabel": "E-Mail",
+    "passwordLabel": "Passwort",
+    "emailPlaceholder": "du@beispiel.de",
+    "confirmEmail": "Überprüfe deine E-Mail zur Kontobestätigung und melde dich dann an.",
+    "pleaseWait": "Bitte warten…",
+    "continueWithGoogle": "Mit Google fortfahren",
+    "or": "oder",
+    "somethingWrong": "Etwas ist schiefgelaufen"
+  },
+  "compile": {
+    "title": "Kompilieren",
+    "subtitle": "Lade deine Notizen hoch, wähle einen Ausgabetyp und lass die KI den Rest erledigen.",
+    "addSources": "1 — Quellen hinzufügen",
+    "orAddUrl": "oder URL hinzufügen",
+    "chooseOutputType": "2 — Ausgabetyp wählen",
+    "options3": "3 — Optionen",
+    "options4": "4 — Optionen",
+    "intentLabel": "Absicht:",
+    "messyNotesModeLabel": "Ungeordneter-Notizen-Modus",
+    "networkError": "Netzwerkfehler — bitte versuche es erneut",
+    "compilationFailed": "Kompilierung fehlgeschlagen",
+    "source": "{count, plural, one {# Quelle} other {# Quellen}}"
+  },
+  "intent": {
+    "study": "Lernhilfe",
+    "studyDesc": "Wandelt Notizen in Lernhilfen, Zusammenfassungen und Prüfungsmaterial um",
+    "business": "Business",
+    "businessDesc": "Konvertiert Recherchen in Berichte, Vorschläge und Kurzreferate",
+    "book": "Buch",
+    "bookDesc": "Strukturiert Notizen in Kapitel, Gliederungen und Manuskriptentwürfe",
+    "content": "Inhalt",
+    "contentDesc": "Verwandelt Ideen in Blogbeiträge, Skripte und Kursübersichten"
+  },
+  "intentLabels": {
+    "study": "Lernhilfe",
+    "business": "Kurzreferat",
+    "book": "Buch / Artikel",
+    "content": "Inhalt"
+  },
+  "template": {
+    "heading": "3 — Vorlage wählen",
+    "optional": "(optional)",
+    "clear": "Löschen"
+  },
+  "fileUploader": {
+    "dropFiles": "Dateien hier ablegen",
+    "dragDrop": "Dateien hier ablegen",
+    "browseHint": "oder zum Durchsuchen klicken — PDF, Bilder, Text, Audio · max. 10 MB je Datei",
+    "uploaded": "Hochgeladen"
+  },
+  "urlIngester": {
+    "placeholder": "https://beispiel.de/artikel",
+    "addUrl": "URL hinzufügen",
+    "failedToFetch": "URL konnte nicht abgerufen werden",
+    "networkError": "Netzwerkfehler — bitte versuche es erneut"
+  },
+  "messyNotes": {
+    "title": "Ungeordneter-Notizen-Modus",
+    "description": "Restrukturiert Fragmente und unvollständige Sätze vor der Kompilierung"
+  },
+  "submitButton": {
+    "compile": "Meine Notizen kompilieren",
+    "compiling": "Kompiliere..."
+  },
+  "usage": {
+    "allUsed": "Du hast alle {limit} kostenlosen Kompilierungen dieses Monats aufgebraucht",
+    "used": "{used} von {limit} kostenlosen Kompilierungen diesen Monat verwendet",
+    "upgrade": "Upgrade",
+    "nearLimit": "{remaining, plural, one {Noch # Kompilierung diesen Monat übrig} other {Noch # Kompilierungen diesen Monat übrig}}"
+  },
+  "output": {
+    "newCompilation": "← Neue Kompilierung",
+    "compiling": "Deine Notizen werden kompiliert…",
+    "failed": "Kompilierung fehlgeschlagen",
+    "failedDesc": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "backToCompile": "Zurück zur Kompilierung",
+    "summary": "Zusammenfassung",
+    "exportText": "Als Text exportieren"
+  },
+  "sourcePanel": {
+    "title": "Quelldateien",
+    "sourceLabel": "QUELLE {n}"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "newCompilation": "+ Neue Kompilierung",
+    "pastCompilations": "Vergangene Kompilierungen",
+    "noCompilations": "Noch keine Kompilierungen.",
+    "createFirst": "Erstelle deine erste"
+  }
+}

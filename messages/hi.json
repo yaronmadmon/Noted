@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "brand": "नॉलेज कंपाइलर",
+    "dashboard": "डैशबोर्ड",
+    "compile": "कंपाइल",
+    "signIn": "साइन इन",
+    "signOut": "साइन आउट"
+  },
+  "home": {
+    "headline": "अव्यवस्थित नोट्स को तैयार काम में बदलें",
+    "subheadline": "हस्तलिखित नोट्स, PDF, वॉयस मेमो या सादा टेक्स्ट अपलोड करें। आउटपुट प्रकार चुनें और AI को सब कुछ एक संरचित, प्रकाशन-तैयार दस्तावेज़ में संकलित करने दें — हर पैराग्राफ अपने स्रोत से जुड़ा।",
+    "cta": "शुरू करें",
+    "cardStudy": "स्टडी गाइड",
+    "cardStudyDesc": "लेक्चर नोट्स और रीडिंग से संरचित सारांश",
+    "cardBrief": "एग्जीक्यूटिव ब्रीफ",
+    "cardBriefDesc": "शोध और डेटा से संक्षिप्त व्यावसायिक दस्तावेज़",
+    "cardReport": "रिपोर्ट",
+    "cardReportDesc": "कई स्रोत फ़ाइलों से संकलित पूर्ण रिपोर्ट"
+  },
+  "auth": {
+    "signIn": "साइन इन",
+    "createAccount": "खाता बनाएं",
+    "noAccount": "खाता नहीं है?",
+    "hasAccount": "पहले से खाता है?",
+    "signUp": "साइन अप",
+    "emailLabel": "ईमेल",
+    "passwordLabel": "पासवर्ड",
+    "emailPlaceholder": "you@example.com",
+    "confirmEmail": "अपना खाता पुष्टि करने के लिए ईमेल जांचें, फिर साइन इन करें।",
+    "pleaseWait": "कृपया प्रतीक्षा करें…",
+    "continueWithGoogle": "Google से जारी रखें",
+    "or": "या",
+    "somethingWrong": "कुछ गलत हो गया"
+  },
+  "compile": {
+    "title": "कंपाइल",
+    "subtitle": "अपने नोट्स अपलोड करें, आउटपुट प्रकार चुनें, और बाकी AI पर छोड़ दें।",
+    "addSources": "1 — स्रोत जोड़ें",
+    "orAddUrl": "या URL जोड़ें",
+    "chooseOutputType": "2 — आउटपुट प्रकार चुनें",
+    "options3": "3 — विकल्प",
+    "options4": "4 — विकल्प",
+    "intentLabel": "उद्देश्य:",
+    "messyNotesModeLabel": "मेसी नोट्स मोड",
+    "networkError": "नेटवर्क त्रुटि — कृपया पुनः प्रयास करें",
+    "compilationFailed": "कंपाइलेशन विफल",
+    "source": "{count, plural, one {# स्रोत} other {# स्रोत}}"
+  },
+  "intent": {
+    "study": "स्टडी गाइड",
+    "studyDesc": "नोट्स को स्टडी गाइड, सारांश और परीक्षा सामग्री में बदलें",
+    "business": "बिज़नेस",
+    "businessDesc": "शोध को रिपोर्ट, प्रस्ताव और एग्जीक्यूटिव ब्रीफ में बदलें",
+    "book": "पुस्तक",
+    "bookDesc": "नोट्स को अध्याय, रूपरेखा और पांडुलिपि में व्यवस्थित करें",
+    "content": "कंटेंट",
+    "contentDesc": "विचारों को ब्लॉग पोस्ट, स्क्रिप्ट और कोर्स आउटलाइन में बदलें"
+  },
+  "intentLabels": {
+    "study": "स्टडी गाइड",
+    "business": "बिज़नेस ब्रीफ",
+    "book": "पुस्तक / लेख",
+    "content": "कंटेंट"
+  },
+  "template": {
+    "heading": "3 — टेम्पलेट चुनें",
+    "optional": "(वैकल्पिक)",
+    "clear": "हटाएं"
+  },
+  "fileUploader": {
+    "dropFiles": "यहाँ फ़ाइलें छोड़ें",
+    "dragDrop": "फ़ाइलें यहाँ खींचें और छोड़ें",
+    "browseHint": "या ब्राउज़ करने के लिए क्लिक करें — PDF, चित्र, टेक्स्ट, ऑडियो · अधिकतम 10MB प्रत्येक",
+    "uploaded": "अपलोड हो गया"
+  },
+  "urlIngester": {
+    "placeholder": "https://example.com/article",
+    "addUrl": "URL जोड़ें",
+    "failedToFetch": "URL प्राप्त करने में विफल",
+    "networkError": "नेटवर्क त्रुटि — कृपया पुनः प्रयास करें"
+  },
+  "messyNotes": {
+    "title": "मेसी नोट्स मोड",
+    "description": "कंपाइल करने से पहले अधूरे वाक्यों और बुलेट फ्रैगमेंट को पुनर्गठित करता है"
+  },
+  "submitButton": {
+    "compile": "मेरे नोट्स कंपाइल करें",
+    "compiling": "कंपाइल हो रहा है..."
+  },
+  "usage": {
+    "allUsed": "आपने इस महीने सभी {limit} मुफ्त कंपाइलेशन उपयोग कर लिए हैं",
+    "used": "इस महीने {used}/{limit} मुफ्त कंपाइलेशन उपयोग हुए",
+    "upgrade": "अपग्रेड करें",
+    "nearLimit": "{remaining, plural, one {इस महीने केवल # कंपाइलेशन शेष} other {इस महीने केवल # कंपाइलेशन शेष}}"
+  },
+  "output": {
+    "newCompilation": "← नया कंपाइलेशन",
+    "compiling": "आपके नोट्स कंपाइल हो रहे हैं…",
+    "failed": "कंपाइलेशन विफल",
+    "failedDesc": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
+    "backToCompile": "कंपाइल पर वापस",
+    "summary": "सारांश",
+    "exportText": "टेक्स्ट के रूप में निर्यात करें"
+  },
+  "sourcePanel": {
+    "title": "स्रोत फ़ाइलें",
+    "sourceLabel": "स्रोत {n}"
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "newCompilation": "+ नया कंपाइलेशन",
+    "pastCompilations": "पिछले कंपाइलेशन",
+    "noCompilations": "अभी तक कोई कंपाइलेशन नहीं।",
+    "createFirst": "पहला बनाएं"
+  }
+}

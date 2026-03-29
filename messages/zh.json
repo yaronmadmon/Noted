@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "brand": "知识编译器",
+    "dashboard": "仪表板",
+    "compile": "编译",
+    "signIn": "登录",
+    "signOut": "退出"
+  },
+  "home": {
+    "headline": "将零散笔记转化为完整作品",
+    "subheadline": "上传手写笔记、PDF、语音备忘录或纯文本。选择输出类型，让AI将所有内容编译成结构化、可发布的文档——每个段落均可追溯至来源。",
+    "cta": "立即开始",
+    "cardStudy": "学习指南",
+    "cardStudyDesc": "从课堂笔记和阅读材料中提取结构化摘要",
+    "cardBrief": "执行摘要",
+    "cardBriefDesc": "从研究和数据中生成简洁的商业文件",
+    "cardReport": "报告",
+    "cardReportDesc": "从多个源文件编译的完整报告"
+  },
+  "auth": {
+    "signIn": "登录",
+    "createAccount": "创建账户",
+    "noAccount": "没有账户？",
+    "hasAccount": "已有账户？",
+    "signUp": "注册",
+    "emailLabel": "邮箱",
+    "passwordLabel": "密码",
+    "emailPlaceholder": "you@example.com",
+    "confirmEmail": "请查收确认邮件，确认账户后登录。",
+    "pleaseWait": "请稍候…",
+    "continueWithGoogle": "使用 Google 继续",
+    "or": "或",
+    "somethingWrong": "出现错误"
+  },
+  "compile": {
+    "title": "编译",
+    "subtitle": "上传笔记，选择输出类型，让AI完成其余工作。",
+    "addSources": "1 — 添加来源",
+    "orAddUrl": "或添加网址",
+    "chooseOutputType": "2 — 选择输出类型",
+    "options3": "3 — 选项",
+    "options4": "4 — 选项",
+    "intentLabel": "意图：",
+    "messyNotesModeLabel": "凌乱笔记模式",
+    "networkError": "网络错误，请重试",
+    "compilationFailed": "编译失败",
+    "source": "{count, plural, other {# 个来源}}"
+  },
+  "intent": {
+    "study": "学习指南",
+    "studyDesc": "将笔记转化为学习指南、摘要和备考材料",
+    "business": "商务",
+    "businessDesc": "将研究转化为报告、提案和执行摘要",
+    "book": "书籍",
+    "bookDesc": "将笔记整理成章节、大纲和书稿",
+    "content": "内容",
+    "contentDesc": "将想法转化为博客文章、脚本和课程大纲"
+  },
+  "intentLabels": {
+    "study": "学习指南",
+    "business": "商务简报",
+    "book": "书籍/文章",
+    "content": "内容"
+  },
+  "template": {
+    "heading": "3 — 选择模板",
+    "optional": "（可选）",
+    "clear": "清除"
+  },
+  "fileUploader": {
+    "dropFiles": "拖放文件至此",
+    "dragDrop": "拖放文件至此",
+    "browseHint": "或点击浏览 — PDF、图片、文本、音频 · 每个最大10MB",
+    "uploaded": "已上传"
+  },
+  "urlIngester": {
+    "placeholder": "https://example.com/article",
+    "addUrl": "添加网址",
+    "failedToFetch": "获取网址失败",
+    "networkError": "网络错误，请重试"
+  },
+  "messyNotes": {
+    "title": "凌乱笔记模式",
+    "description": "在编译前重新整理碎片化内容和不完整的句子"
+  },
+  "submitButton": {
+    "compile": "编译我的笔记",
+    "compiling": "编译中..."
+  },
+  "usage": {
+    "allUsed": "您本月已用完全部 {limit} 次免费编译",
+    "used": "本月已使用 {used}/{limit} 次免费编译",
+    "upgrade": "升级",
+    "nearLimit": "{remaining, plural, other {本月仅剩 # 次编译}}"
+  },
+  "output": {
+    "newCompilation": "← 新建编译",
+    "compiling": "正在编译您的笔记…",
+    "failed": "编译失败",
+    "failedDesc": "出现错误，请重试。",
+    "backToCompile": "返回编译",
+    "summary": "摘要",
+    "exportText": "导出为文本"
+  },
+  "sourcePanel": {
+    "title": "源文件",
+    "sourceLabel": "来源 {n}"
+  },
+  "dashboard": {
+    "title": "仪表板",
+    "newCompilation": "+ 新建编译",
+    "pastCompilations": "历史编译",
+    "noCompilations": "暂无编译记录。",
+    "createFirst": "创建第一个"
+  }
+}

@@ -1,18 +1,20 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 interface MessyNotesToggleProps {
   enabled: boolean
   onChange: (enabled: boolean) => void
 }
 
 export default function MessyNotesToggle({ enabled, onChange }: MessyNotesToggleProps) {
+  const t = useTranslations('messyNotes')
+
   return (
     <div className="flex items-center justify-between bg-white border border-gray-100 rounded-xl px-4 py-3">
       <div>
-        <p className="text-sm font-medium text-gray-900">Messy Notes Mode</p>
-        <p className="text-xs text-gray-400 mt-0.5">
-          Restructures bullet fragments and incomplete sentences before compiling
-        </p>
+        <p className="text-sm font-medium text-gray-900">{t('title')}</p>
+        <p className="text-xs text-gray-400 mt-0.5">{t('description')}</p>
       </div>
       <button
         role="switch"

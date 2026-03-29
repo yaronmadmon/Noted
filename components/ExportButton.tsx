@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { CompilationOutput } from '@/types'
 
 interface ExportButtonProps {
@@ -30,6 +31,8 @@ function buildPlainText(output: CompilationOutput): string {
 }
 
 export default function ExportButton({ output }: ExportButtonProps) {
+  const t = useTranslations('output')
+
   function handleExport() {
     const text = buildPlainText(output)
     const blob = new Blob([text], { type: 'text/plain' })
@@ -46,7 +49,7 @@ export default function ExportButton({ output }: ExportButtonProps) {
       onClick={handleExport}
       className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
     >
-      <span>↓</span> Export as text
+      <span>↓</span> {t('exportText')}
     </button>
   )
 }

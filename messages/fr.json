@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "brand": "Compilateur de Connaissances",
+    "dashboard": "Tableau de bord",
+    "compile": "Compiler",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter"
+  },
+  "home": {
+    "headline": "Transformez vos notes en travail finalisé",
+    "subheadline": "Importez des notes manuscrites, des PDF, des mémos vocaux ou du texte brut. Choisissez le type de sortie et laissez l'IA tout compiler en un document structuré et prêt à publier, avec chaque paragraphe tracé jusqu'à sa source.",
+    "cta": "Commencer",
+    "cardStudy": "Guide d'étude",
+    "cardStudyDesc": "Résumés structurés à partir de notes de cours et de lectures",
+    "cardBrief": "Note de synthèse",
+    "cardBriefDesc": "Documents professionnels concis à partir de recherches et de données",
+    "cardReport": "Rapport",
+    "cardReportDesc": "Rapports complets compilés à partir de plusieurs fichiers sources"
+  },
+  "auth": {
+    "signIn": "Se connecter",
+    "createAccount": "Créer un compte",
+    "noAccount": "Pas de compte ?",
+    "hasAccount": "Déjà un compte ?",
+    "signUp": "S'inscrire",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Mot de passe",
+    "emailPlaceholder": "vous@exemple.com",
+    "confirmEmail": "Vérifiez votre e-mail pour confirmer votre compte, puis connectez-vous.",
+    "pleaseWait": "Veuillez patienter…",
+    "continueWithGoogle": "Continuer avec Google",
+    "or": "ou",
+    "somethingWrong": "Une erreur s'est produite"
+  },
+  "compile": {
+    "title": "Compiler",
+    "subtitle": "Importez vos notes, choisissez le type de sortie et laissez l'IA faire le reste.",
+    "addSources": "1 — Ajouter des sources",
+    "orAddUrl": "ou ajouter une URL",
+    "chooseOutputType": "2 — Choisir le type de sortie",
+    "options3": "3 — Options",
+    "options4": "4 — Options",
+    "intentLabel": "Intention :",
+    "messyNotesModeLabel": "Mode Notes Désordonnées",
+    "networkError": "Erreur réseau — veuillez réessayer",
+    "compilationFailed": "Compilation échouée",
+    "source": "{count, plural, one {# source} other {# sources}}"
+  },
+  "intent": {
+    "study": "Guide d'étude",
+    "studyDesc": "Transforme les notes en guides d'étude, résumés et supports d'examen",
+    "business": "Business",
+    "businessDesc": "Convertit la recherche en rapports, propositions et notes de synthèse",
+    "book": "Livre",
+    "bookDesc": "Structure les notes en chapitres, plans et ébauches de manuscrits",
+    "content": "Contenu",
+    "contentDesc": "Transforme les idées en articles de blog, scripts et plans de cours"
+  },
+  "intentLabels": {
+    "study": "Guide d'étude",
+    "business": "Note exécutive",
+    "book": "Livre / Article",
+    "content": "Contenu"
+  },
+  "template": {
+    "heading": "3 — Choisir un modèle",
+    "optional": "(facultatif)",
+    "clear": "Effacer"
+  },
+  "fileUploader": {
+    "dropFiles": "Déposez les fichiers ici",
+    "dragDrop": "Glissez-déposez les fichiers ici",
+    "browseHint": "ou cliquez pour parcourir — PDF, images, texte, audio · max 10 Mo chacun",
+    "uploaded": "Importé"
+  },
+  "urlIngester": {
+    "placeholder": "https://exemple.com/article",
+    "addUrl": "Ajouter l'URL",
+    "failedToFetch": "Impossible de récupérer l'URL",
+    "networkError": "Erreur réseau — veuillez réessayer"
+  },
+  "messyNotes": {
+    "title": "Mode Notes Désordonnées",
+    "description": "Restructure les fragments et les phrases incomplètes avant la compilation"
+  },
+  "submitButton": {
+    "compile": "Compiler mes notes",
+    "compiling": "Compilation en cours..."
+  },
+  "usage": {
+    "allUsed": "Vous avez utilisé toutes vos {limit} compilations gratuites ce mois-ci",
+    "used": "{used} sur {limit} compilations gratuites utilisées ce mois-ci",
+    "upgrade": "Passer à la version supérieure",
+    "nearLimit": "{remaining, plural, one {Seulement # compilation restante ce mois-ci} other {Seulement # compilations restantes ce mois-ci}}"
+  },
+  "output": {
+    "newCompilation": "← Nouvelle compilation",
+    "compiling": "Compilation de vos notes…",
+    "failed": "Compilation échouée",
+    "failedDesc": "Une erreur s'est produite. Veuillez réessayer.",
+    "backToCompile": "Retour à la compilation",
+    "summary": "Résumé",
+    "exportText": "Exporter en texte"
+  },
+  "sourcePanel": {
+    "title": "Fichiers sources",
+    "sourceLabel": "SOURCE {n}"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "newCompilation": "+ Nouvelle compilation",
+    "pastCompilations": "Compilations passées",
+    "noCompilations": "Aucune compilation pour l'instant.",
+    "createFirst": "Créez votre première"
+  }
+}

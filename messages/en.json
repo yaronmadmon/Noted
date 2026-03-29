@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "brand": "Knowledge Compiler",
+    "dashboard": "Dashboard",
+    "compile": "Compile",
+    "signIn": "Sign in",
+    "signOut": "Sign out"
+  },
+  "home": {
+    "headline": "Turn messy notes into finished work",
+    "subheadline": "Upload handwritten notes, PDFs, voice memos, or plain text. Choose your output type and let AI compile everything into a structured, publish-ready document — with every paragraph traced back to its source.",
+    "cta": "Get Started",
+    "cardStudy": "Study Guide",
+    "cardStudyDesc": "Structured summaries from lecture notes and readings",
+    "cardBrief": "Executive Brief",
+    "cardBriefDesc": "Concise business documents from research and data",
+    "cardReport": "Report",
+    "cardReportDesc": "Full reports compiled from multiple source files"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "createAccount": "Create account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signUp": "Sign up",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "emailPlaceholder": "you@example.com",
+    "confirmEmail": "Check your email to confirm your account, then sign in.",
+    "pleaseWait": "Please wait…",
+    "continueWithGoogle": "Continue with Google",
+    "or": "or",
+    "somethingWrong": "Something went wrong"
+  },
+  "compile": {
+    "title": "Compile",
+    "subtitle": "Upload your notes, choose an output type, and let AI do the rest.",
+    "addSources": "1 — Add Sources",
+    "orAddUrl": "or add a URL",
+    "chooseOutputType": "2 — Choose Output Type",
+    "options3": "3 — Options",
+    "options4": "4 — Options",
+    "intentLabel": "Intent:",
+    "messyNotesModeLabel": "Messy Notes Mode",
+    "networkError": "Network error — please try again",
+    "compilationFailed": "Compilation failed",
+    "source": "{count, plural, one {# source} other {# sources}}"
+  },
+  "intent": {
+    "study": "Study Guide",
+    "studyDesc": "Turns notes into study guides, summaries, and exam prep materials",
+    "business": "Business",
+    "businessDesc": "Converts research into reports, proposals, and executive briefs",
+    "book": "Book",
+    "bookDesc": "Structures notes into chapters, outlines, and manuscript drafts",
+    "content": "Content",
+    "contentDesc": "Transforms ideas into blog posts, scripts, and course outlines"
+  },
+  "intentLabels": {
+    "study": "Study Guide",
+    "business": "Business Brief",
+    "book": "Book / Article",
+    "content": "Content"
+  },
+  "template": {
+    "heading": "3 — Choose Template",
+    "optional": "(optional)",
+    "clear": "Clear"
+  },
+  "fileUploader": {
+    "dropFiles": "Drop files here",
+    "dragDrop": "Drag & drop files here",
+    "browseHint": "or click to browse — PDF, images, text, audio · max 10MB each",
+    "uploaded": "Uploaded"
+  },
+  "urlIngester": {
+    "placeholder": "https://example.com/article",
+    "addUrl": "Add URL",
+    "failedToFetch": "Failed to fetch URL",
+    "networkError": "Network error — please try again"
+  },
+  "messyNotes": {
+    "title": "Messy Notes Mode",
+    "description": "Restructures bullet fragments and incomplete sentences before compiling"
+  },
+  "submitButton": {
+    "compile": "Compile My Notes",
+    "compiling": "Compiling..."
+  },
+  "usage": {
+    "allUsed": "You have used all {limit} free compilations this month",
+    "used": "{used} of {limit} free compilations used this month",
+    "upgrade": "Upgrade",
+    "nearLimit": "{remaining, plural, one {Only # compilation remaining this month} other {Only # compilations remaining this month}}"
+  },
+  "output": {
+    "newCompilation": "← New compilation",
+    "compiling": "Compiling your notes…",
+    "failed": "Compilation failed",
+    "failedDesc": "Something went wrong. Please try again.",
+    "backToCompile": "Back to Compile",
+    "summary": "Summary",
+    "exportText": "Export as text"
+  },
+  "sourcePanel": {
+    "title": "Source Files",
+    "sourceLabel": "SOURCE {n}"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "newCompilation": "+ New compilation",
+    "pastCompilations": "Past compilations",
+    "noCompilations": "No compilations yet.",
+    "createFirst": "Create your first one"
+  }
+}
