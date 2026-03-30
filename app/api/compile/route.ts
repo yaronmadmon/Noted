@@ -110,6 +110,10 @@ export async function POST(req: NextRequest) {
         }
       }
 
+      if (!text || text.trim().length < 20) {
+        return err(`Could not extract readable text from ${record.file_name}. Try a clearer image or copy-paste the text directly.`, 'EXTRACTION_EMPTY', 422)
+      }
+
       sources.push({ fileName: record.file_name, text })
     }
 

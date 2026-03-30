@@ -76,8 +76,15 @@ ${stitchReport.contradictions.map((c) => `• "${c.concept}": ${c.sourceA} says 
   return `${INTENT_INSTRUCTIONS[intent]}
 
 You will be given one or more source documents. Your job is to compile them into a single,
-coherent, well-structured document. Every section you write MUST reference the source(s)
-it draws from using the sourceRefs field.
+coherent, well-structured document based STRICTLY on the provided source content.
+
+CRITICAL RULES — you MUST follow these without exception:
+- Use ONLY information that is explicitly present in the source documents.
+- Do NOT add any information, facts, advice, or examples that are not in the sources.
+- Do NOT invent, pad, or generalise beyond what the sources say.
+- If the source text is in a language other than English, faithfully compile from that content — do not switch to generic placeholder text.
+- If the sources contain too little content to fill a section, write only what is there.
+- Every section you write MUST reference the source(s) it draws from using the sourceRefs field.
 
 DOCUMENT STRUCTURE:
 ${structureInstruction}
